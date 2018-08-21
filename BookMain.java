@@ -1,17 +1,23 @@
 class Author
 {
-String name,email;
-char gender;
+  String name,email;
+  char gender;
+  Author(String name , String email,char g)
+{
+ this.name = name;
+ this.email=email;
+  gender=g;
+} 
 
 
 }
 
 
-class Book extends Author
+class Book 
 {
  
 String name;
-Auhtor author;
+Author author;
 double price;
 int qty;
 
@@ -42,13 +48,22 @@ int getQty()
 return qty;
 }
 
+double getTotalAmt()
+{
+  return price*qty;
+}
+
 void setQty(int q)
 {
 qty=q;
 }
 
-String toString()
+void display(Author a)
+
 {
+
+System.out.println("Author Name="+a.name);
+
 }
 }
 
@@ -56,6 +71,21 @@ class BookMain
 {
 public static void main(String args[])
 {
+ Author a = new Author("Chiruhas","chiruhas.bobbadi123@gmail.com",'m');
+
+  Book b = new Book("Ghost in the wires",a,1000.15,3);
+  
+   // printing details
+
+System.out.println("***Book Details****");
+System.out.println("Name = "+b.name);
+System.out.println("Price="+b.getPrice());
+System.out.println("Quantity="+b.getQty());
+System.out.println("Total = "+b.getTotalAmt());
+
+b.display(a);
+
+
 
 
 }
