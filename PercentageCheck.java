@@ -1,15 +1,15 @@
 import java.util.*;
-public class AttendanceCheck{
+public class HelloWorld{
    static String result[]; 
       static int n;
-     static  String names[]= new String[n];
-       static String atd[] = new String[n];
+    
     static int j=0;
      public static void main(String []args){
          int n1;
          Scanner sc = new Scanner(System.in);
         n1 = sc.nextInt();
-      
+         String names[]= new String[n1];
+        String atd[] = new String[n1];
        for(int i=0;i<n1;i++)
        names[i] = sc.next();
        
@@ -20,11 +20,11 @@ public class AttendanceCheck{
        
        n=n1;
        
-      calculate();
+      calculate(names,atd);
        
      }
      
-     static void  calculate()
+     static void  calculate(String names[] , String atd[])
      {   int p,a,m,t;
      p=0;
      a=0;
