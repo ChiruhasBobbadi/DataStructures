@@ -1,0 +1,31 @@
+SinglyLinkedListNode* mergeLists(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+
+    SinglyLinkedListNode *temp1 = head1,*temp2;
+    int temp;
+    while(temp1->next!=NULL)
+    {
+        temp1=temp1->next;
+        
+    }
+    temp1->next = head2;
+    
+    temp1 = head1;
+  
+    while(temp1->next!=NULL)
+    {  temp2 = temp1->next;
+        while(temp2->next!=NULL)
+        {
+            if(temp1->data > temp2->data)
+            {
+                temp= temp1->data;
+                temp1->data = temp2->data;
+                temp2->data = temp;
+            }
+            temp2 = temp2->next;
+        }
+     temp1=temp1->next;
+    }
+    
+    return head1;
+
+}
