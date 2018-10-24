@@ -1,17 +1,14 @@
-
-
 #include<stdio.h>
 #include<stdlib.h>
-
 struct node
 {
 struct node* left;
 struct node* right;
 int data;
 };
-
 struct node *root=NULL;
 struct node *temp =NULL;
+struct node *prev =NULL;
 void insert(int data)
 {
 	struct node*t;
@@ -84,31 +81,102 @@ void print_tree(struct tree *r,int l)
 }
 * */
 
+
+		
+
+ struct node* findMax(struct node* t)
+ {
+	 if(t==NULL)
+	 return NULL;
+	 else
+	 {
+		 if(t->right==NULL)
+		 return t;
+		 else
+		 findMax(t->right);
+	 }
+ }
+
+	 struct node* findMin(struct node* t)
+	 {
+		 
+		 if(t==NULL)
+		 return NULL;
+		 else
+		 {
+		 if(t->left==NULL)
+		 return t;
+		 else
+		 findMin(t->left);
+	 }
+ }
+
 void delete(int el)
-{
-	struct node *prev =NULL;
-	
+{   int da;
 	
 	if(temp->data >el)
 	{  prev=temp;
 		temp=temp->left;
+		printf("\ntemp=%d\nprev=%d\n\n",temp->data,prev->data);
 		delete(el);
 	}
 	if(temp->data < el)
 	{   prev=temp;
 		temp=temp->right;
+		printf("\ntemp=%d\nprev=%d\n\n",temp->data,prev->data);
 		delete(el);
 	}
 	if(temp->data==el)
 	{
-		
+			
+				
+				//for leaf node
 			 if(temp->right==NULL && temp->left==NULL)
 			 {
-				 printf("%d deleted , which is attached to of %d",el,temp->data);
+				 printf("%d deleted ",el);
+				 
 				 prev->right=NULL;
+				 free(temp);
 			 }
+			 // for node with two subtrees
+			 if(temp->right!=NULL && temp->left!=NULL)
+			 {
+				    da=findMax(temp->left)->data;
+				    //delte(da);
+				    printf("%d deleted ",temp->data);
+				    printf("it is replaced with %d",da);
+				    temp->data = da;
+				    free(temp);
+				    
 		 }
-	 }
+		 
+		 // for one subtree
+		
+			 
+		 
+	 
+ }
+}
+
+	 
+	 
+ 
+
+ void display(struct node* t,int level)
+                          {
+                            int i;
+                            struct node* p;
+                             if(t)
+                               {
+                                          display(t->right,level+1);
+                                          printf("\n");
+                                          for(i=0;i<level;i++)
+                                          printf("  ");
+                                          printf(" %d",t->data);
+                                          display ( t -> left , level+1 );
+                                      }
+                                   }
+		 
 				
 				 
 			 
@@ -119,9 +187,10 @@ int main()
 {
 	int ch;
 	int el;
+	int le;
 	while(1)
 	{
-		printf("1 for insertion \n2 for display\n 3 to exit\n");
+		printf("1 for insertion \n2 for display\n3 to delete \n4 for max and min element\n5 to exit\n");
 		scanf("%d",&ch);
 		switch(ch)
 		{
@@ -133,13 +202,27 @@ int main()
 			case 2:
 			//printf("coming soon..\n");
 			//print_tree(root,0);
+			printf("\nEnter level\n");
+			scanf("%d",&le);
+			display(root,le);
 			break;
 			case 3:
+			printf("Enter element to delete\n");
+			scanf("%d",&el);
+			delete(el);
+			break;
+			case 4:
+			printf("minimum =%d\n",findMin(root)->data);
+			printf("Maximum =%d\n",findMax(root)->data);
+			break;
+			case 5:
 			exit(0);
 			break;
-		}}
-		return 0;
 		}
+	}
+		return 0;
+	}
+	
 			
  
  
